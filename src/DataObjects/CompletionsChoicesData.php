@@ -2,9 +2,10 @@
 
 namespace Taecontrol\OpenRouter\DataObjects;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 
-class CompletionsChoicesData
+class CompletionsChoicesData implements Arrayable
 {
     public function __construct(
         public ?string $text = null,
@@ -19,5 +20,14 @@ class CompletionsChoicesData
             index: Arr::get($data, 'index'),
             finishReason: Arr::get($data, 'finish_reason')
         );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'text' => $this->text,
+            'index' => $this->index,
+            'finish_reason' => $this->finishReason,
+        ];
     }
 }

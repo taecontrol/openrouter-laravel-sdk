@@ -1,6 +1,6 @@
 <?php
 
-namespace Taecontrol\OpenRouter\DataObjects\Enums;
+namespace Taecontrol\OpenRouter\Enums;
 
 enum Effort: string
 {

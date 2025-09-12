@@ -4,25 +4,13 @@ namespace Taecontrol\OpenRouter;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Taecontrol\OpenRouter\DataObjects\ReasoningData;
-use Taecontrol\OpenRouter\DataObjects\UsageData;
+use Taecontrol\OpenRouter\DataObjects\CompletionsData;
 
 class CompletionsRequest extends Request
 {
     protected Method $method = Method::POST;
 
-    public function __construct(
-        protected readonly string $model,
-        protected readonly string $prompt,
-        protected readonly ?ReasoningData $reasoningData = null,
-        protected readonly ?UsageData $usageData = null,
-        protected readonly ?int $maxTokens = null,
-        protected readonly ?float $temperature = null,
-        protected readonly ?int $seed = null,
-        protected readonly ?float $topP = null,
-        protected readonly ?int $topK = null,
-        protected readonly ?string $user = null,
-    ) {}
+    public function __construct(public readonly CompletionsData $data) {}
 
     public function resolveEndpoint(): string
     {
@@ -40,40 +28,40 @@ class CompletionsRequest extends Request
     public function defaultBody(): array
     {
         $data = [
-            'model' => $this->model,
-            'prompt' => $this->prompt,
+            'model' => $this->data->model,
+            'prompt' => $this->data->prompt,
         ];
 
-        if ($this->reasoningData) {
-            $data['reasoning'] = $this->reasoningData->toArray();
+        if ($this->data->reasoningData) {
+            $data['reasoning'] = $this->data->reasoningData->toArray();
         }
 
-        if ($this->usageData) {
-            $data['usage'] = $this->usageData->toArray();
+        if ($this->data->usageData) {
+            $data['usage'] = $this->data->usageData->toArray();
         }
 
-        if ($this->maxTokens !== null) {
-            $data['max_tokens'] = $this->maxTokens;
+        if ($this->data->maxTokens !== null) {
+            $data['max_tokens'] = $this->data->maxTokens;
         }
 
-        if ($this->temperature !== null) {
-            $data['temperature'] = $this->temperature;
+        if ($this->data->temperature !== null) {
+            $data['temperature'] = $this->data->temperature;
         }
 
-        if ($this->seed !== null) {
-            $data['seed'] = $this->seed;
+        if ($this->data->seed !== null) {
+            $data['seed'] = $this->data->seed;
         }
 
-        if ($this->topP !== null) {
-            $data['top_p'] = $this->topP;
+        if ($this->data->topP !== null) {
+            $data['top_p'] = $this->data->topP;
         }
 
-        if ($this->topK !== null) {
-            $data['top_k'] = $this->topK;
+        if ($this->data->topK !== null) {
+            $data['top_k'] = $this->data->topK;
         }
 
-        if ($this->user !== null) {
-            $data['user'] = $this->user;
+        if ($this->data->user !== null) {
+            $data['user'] = $this->data->user;
         }
 
         return $data;

@@ -3,7 +3,7 @@
 namespace Taecontrol\OpenRouter\DataObjects;
 
 use Illuminate\Contracts\Support\Arrayable;
-use Taecontrol\OpenRouter\DataObjects\Enums\Effort;
+use Taecontrol\OpenRouter\Enums\Effort;
 
 class ReasoningData implements Arrayable
 {

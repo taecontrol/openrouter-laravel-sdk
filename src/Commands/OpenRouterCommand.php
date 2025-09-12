@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Taecontrol\OpenRouter\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class OpenRouterCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'openrouter-laravel-sdk';
 
     public $description = 'My command';
 

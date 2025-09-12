@@ -6,21 +6,24 @@ use Saloon\Exceptions\Request\FatalRequestException;
 use Saloon\Exceptions\Request\RequestException;
 use Taecontrol\OpenRouter\CompletionsRequest;
 use Taecontrol\OpenRouter\DataObjects\CompletionsData;
+use Taecontrol\OpenRouter\DataObjects\CompletionsResponse;
 use Taecontrol\OpenRouter\OpenRouter;
 use Throwable;
 
 /**
  * @mixin OpenRouter
  */
-trait HandlesCompletions {
+trait HandlesCompletions
+{
     /**
      * @throws FatalRequestException
      * @throws RequestException
      * @throws Throwable
      */
-    public function completions(CompletionsData $data)
+    public function completions(CompletionsData $data): CompletionsResponse
     {
         $response = $this->connector->send(new CompletionsRequest($data))->throw();
 
+        return $response->dtoOrFail();
     }
 }

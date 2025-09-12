@@ -2,9 +2,12 @@
 
 namespace Taecontrol\OpenRouter;
 
+use JsonException;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Http\Response;
 use Taecontrol\OpenRouter\DataObjects\CompletionsData;
+use Taecontrol\OpenRouter\DataObjects\CompletionsResponse;
 
 class CompletionsRequest extends Request
 {
@@ -23,6 +26,16 @@ class CompletionsRequest extends Request
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
         ];
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function createDtoFromResponse(Response $response): CompletionsResponse
+    {
+        $data = $response->json();
+
+        return CompletionsResponse::from($data);
     }
 
     public function defaultBody(): array

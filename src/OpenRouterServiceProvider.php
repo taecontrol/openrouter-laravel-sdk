@@ -4,7 +4,6 @@ namespace Taecontrol\OpenRouter;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Taecontrol\OpenRouter\Commands\OpenRouterCommand;
 
 class OpenRouterServiceProvider extends PackageServiceProvider
 {

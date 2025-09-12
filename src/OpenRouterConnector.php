@@ -1,6 +1,6 @@
 <?php
 
-namespace Taecontrol\OpenRouter\Commands;
+namespace Taecontrol\OpenRouter;
 
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\HasTimeout;

@@ -9,9 +9,6 @@ class OpenRouterConnector extends Connector
 {
     use HasTimeout;
 
-    /**
-     * @inheritDoc
-     */
     public function resolveBaseUrl(): string
     {
         return config('openrouter-laravel-sdk.base_uri');

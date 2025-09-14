@@ -33,4 +33,11 @@ class OpenRouterConnector extends Connector
     {
         return config('openrouter-laravel-sdk.request_timeout');
     }
+
+    protected function defaultHeaders(): array
+    {
+        return [
+            'Content-Type' => 'application/json',
+        ];
+    }
 }

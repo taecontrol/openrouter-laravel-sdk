@@ -2,27 +2,39 @@
 
 namespace Taecontrol\OpenRouter\Requests;
 
+use JsonException;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Taecontrol\OpenRouter\DataObjects\CompletionsData;
+use Saloon\Http\Response;
+use Taecontrol\OpenRouter\DataObjects\ChatCompletionsData;
+use Taecontrol\OpenRouter\DataObjects\ChatCompletionsResponse;
 
-class CompletionsStreamRequest extends Request
+class ChatCompletionsRequest extends Request
 {
     protected Method $method = Method::POST;
 
-    public function __construct(public readonly CompletionsData $data) {}
+    public function __construct(public readonly ChatCompletionsData $data) {}
 
     public function resolveEndpoint(): string
     {
-        return '/completions';
+        return '/chat/completions';
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function createDtoFromResponse(Response $response): ChatCompletionsResponse
+    {
+        $data = $response->json();
+
+        return ChatCompletionsResponse::from($data);
     }
 
     public function defaultBody(): array
     {
         $data = [
             'model' => $this->data->model,
-            'prompt' => $this->data->prompt,
-            'stream' => true,
+            'messages' => $this->data->messages,
         ];
 
         if ($this->data->reasoningData) {

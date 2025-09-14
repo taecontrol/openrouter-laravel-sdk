@@ -2,10 +2,12 @@
 
 namespace Taecontrol\OpenRouter;
 
+use Taecontrol\OpenRouter\Concerns\HandlesChatCompletions;
 use Taecontrol\OpenRouter\Concerns\HandlesCompletions;
 
 class OpenRouter
 {
+    use HandlesChatCompletions;
     use HandlesCompletions;
 
     protected OpenRouterConnector $connector;

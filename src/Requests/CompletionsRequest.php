@@ -20,14 +20,6 @@ class CompletionsRequest extends Request
         return '/completions';
     }
 
-    protected function defaultHeaders(): array
-    {
-        return [
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
-        ];
-    }
-
     /**
      * @throws JsonException
      */

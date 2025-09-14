@@ -4,24 +4,24 @@ namespace Taecontrol\OpenRouter\Requests;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Taecontrol\OpenRouter\DataObjects\CompletionsData;
+use Taecontrol\OpenRouter\DataObjects\ChatCompletionsData;
 
-class CompletionsStreamRequest extends Request
+class ChatCompletionsStreamRequest extends Request
 {
     protected Method $method = Method::POST;
 
-    public function __construct(public readonly CompletionsData $data) {}
+    public function __construct(public readonly ChatCompletionsData $data) {}
 
     public function resolveEndpoint(): string
     {
-        return '/completions';
+        return '/chat/completions';
     }
 
     public function defaultBody(): array
     {
         $data = [
             'model' => $this->data->model,
-            'prompt' => $this->data->prompt,
+            'messages' => $this->data->messages,
             'stream' => true,
         ];
 

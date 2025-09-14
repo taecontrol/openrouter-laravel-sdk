@@ -24,7 +24,7 @@ trait HandlesCompletions
      */
     public function completions(CompletionsData $data): CompletionsResponse
     {
-        $response = $this->connector->send(new CompletionsRequest($data))->throw();
+        $response = $this->connector()->send(new CompletionsRequest($data))->throw();
 
         return $response->dtoOrFail();
     }
@@ -36,7 +36,7 @@ trait HandlesCompletions
      */
     public function completionsStream(CompletionsData $data): StreamInterface
     {
-        $response = $this->connector->send(new CompletionsStreamRequest($data))->throw();
+        $response = $this->connector()->send(new CompletionsStreamRequest($data))->throw();
 
         return $response->stream();
     }

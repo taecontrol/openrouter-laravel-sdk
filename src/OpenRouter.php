@@ -10,10 +10,10 @@ class OpenRouter
     use HandlesChatCompletions;
     use HandlesCompletions;
 
-    protected OpenRouterConnector $connector;
+    public function __construct(public ?string $token = null) {}
 
-    public function __construct(?string $token = null)
+    public function connector(): OpenRouterConnector
     {
-        $this->connector = new OpenRouterConnector($token);
+        return new OpenRouterConnector($this->token);
     }
 }

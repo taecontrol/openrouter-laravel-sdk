@@ -24,7 +24,7 @@ trait HandlesChatCompletions
      */
     public function chatCompletions(ChatCompletionsData $data): ChatCompletionsResponse
     {
-        $response = $this->connector->send(new ChatCompletionsRequest($data))->throw();
+        $response = $this->connector()->send(new ChatCompletionsRequest($data))->throw();
 
         return $response->dtoOrFail();
     }
@@ -36,7 +36,7 @@ trait HandlesChatCompletions
      */
     public function chatCompletionsStream(ChatCompletionsData $data): StreamInterface
     {
-        $response = $this->connector->send(new ChatCompletionsStreamRequest($data))->throw();
+        $response = $this->connector()->send(new ChatCompletionsStreamRequest($data))->throw();
 
         return $response->stream();
     }

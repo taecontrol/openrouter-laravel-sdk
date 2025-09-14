@@ -35,8 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Taecontrol\\OpenRouter\\": "src/",
-            "Taecontrol\\OpenRouter\\Database\\Factories\\": "database/factories/"
+            "Taecontrol\\OpenRouter\\": "src/"
         }
     },
     "autoload-dev": {

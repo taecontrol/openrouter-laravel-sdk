@@ -1,15 +1,12 @@
 <?php
 
-namespace Taecontrol\OpenRouter;
+namespace Taecontrol\OpenRouter\Requests;
 
-use JsonException;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Http\Response;
 use Taecontrol\OpenRouter\DataObjects\CompletionsData;
-use Taecontrol\OpenRouter\DataObjects\CompletionsResponse;
 
-class CompletionsRequest extends Request
+class CompletionsStreamRequest extends Request
 {
     protected Method $method = Method::POST;
 
@@ -24,18 +21,7 @@ class CompletionsRequest extends Request
     {
         return [
             'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
         ];
-    }
-
-    /**
-     * @throws JsonException
-     */
-    public function createDtoFromResponse(Response $response): CompletionsResponse
-    {
-        $data = $response->json();
-
-        return CompletionsResponse::from($data);
     }
 
     public function defaultBody(): array
@@ -43,6 +29,7 @@ class CompletionsRequest extends Request
         $data = [
             'model' => $this->data->model,
             'prompt' => $this->data->prompt,
+            'stream' => true,
         ];
 
         if ($this->data->reasoningData) {

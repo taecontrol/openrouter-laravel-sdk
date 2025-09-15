@@ -12,7 +12,7 @@ class ChatCompletionsResponse implements Arrayable
 
     public function __construct(
         public string $id,
-        /** @var ChatCompletionsChoicesData[] */
+        /** @var ChatCompletionsChoiceData[] */
         public array $choices = [],
         public ?string $provider = null,
         public ?string $model = null,
@@ -24,7 +24,7 @@ class ChatCompletionsResponse implements Arrayable
     public static function from(array $data): self
     {
         $choices = array_map(
-            fn ($choice) => ChatCompletionsChoicesData::from($choice),
+            fn ($choice) => ChatCompletionsChoiceData::from($choice),
             Arr::get($data, 'choices', [])
         );
 

@@ -16,9 +16,9 @@ class UsageResponseData implements Arrayable
     public static function from(array $data): self
     {
         return new self(
-            promptTokens: Arr::get($data, 'promptTokens', 0),
-            completionTokens: Arr::get($data, 'completionTokens', 0),
-            totalTokens: Arr::get($data, 'totalTokens', 0),
+            promptTokens: Arr::get($data, 'prompt_tokens', 0),
+            completionTokens: Arr::get($data, 'completion_tokens', 0),
+            totalTokens: Arr::get($data, 'total_tokens', 0),
         );
     }
 

@@ -11,6 +11,9 @@ class ChatCompletionsMessageData implements Arrayable
     public function __construct(
         public Role $role,
         public string $content,
+        public ?string $refusal = null,
+        public ?string $reasoning = null,
+        public array $reasoningDetails = [],
     ) {}
 
     public static function from(array $data): self
@@ -18,6 +21,9 @@ class ChatCompletionsMessageData implements Arrayable
         return new self(
             role: Arr::get($data, 'role'),
             content: Arr::get($data, 'content'),
+            refusal: Arr::get($data, 'refusal'),
+            reasoning: Arr::get($data, 'reasoning'),
+            reasoningDetails: Arr::get($data, 'reasoning_details', []),
         );
     }
 
@@ -26,6 +32,9 @@ class ChatCompletionsMessageData implements Arrayable
         return [
             'role' => $this->role,
             'content' => $this->content,
+            'refusal' => $this->refusal,
+            'reasoning' => $this->reasoning,
+            'reasoning_details' => $this->reasoningDetails,
         ];
     }
 }

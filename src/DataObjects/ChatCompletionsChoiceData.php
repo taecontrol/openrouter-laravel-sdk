@@ -5,11 +5,10 @@ namespace Taecontrol\OpenRouter\DataObjects;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 
-class ChatCompletionsChoicesData implements Arrayable
+class ChatCompletionsChoiceData implements Arrayable
 {
     public function __construct(
         public ChatCompletionsMessageData $message,
-        public ?string $refusal = null,
         public ?string $logProbs = null,
         public ?string $finishReason = null,
         public ?string $nativeFinishReason = null,
@@ -20,7 +19,6 @@ class ChatCompletionsChoicesData implements Arrayable
     {
         return new self(
             message: ChatCompletionsMessageData::from($data),
-            refusal: Arr::get($data, 'refusal'),
             logProbs: Arr::get($data, 'logprobs'),
             finishReason: Arr::get($data, 'finish_reason'),
             nativeFinishReason: Arr::get($data, 'native_finish_reason'),
@@ -32,7 +30,6 @@ class ChatCompletionsChoicesData implements Arrayable
     {
         return [
             'message' => $this->message->toArray(),
-            'refusal' => $this->refusal,
             'logprobs' => $this->logProbs,
             'finish_reason' => $this->finishReason,
             'native_finish_reason' => $this->nativeFinishReason,

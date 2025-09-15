@@ -8,7 +8,7 @@ class ChatCompletionsData implements Arrayable
 {
     public function __construct(
         public readonly string $model,
-        /** @var ChatCompletionMessagesData[] */
+        /** @var ChatCompletionsMessageData[] */
         public readonly array $messages,
         public readonly ?ReasoningData $reasoningData = null,
         public readonly ?UsageData $usageData = null,

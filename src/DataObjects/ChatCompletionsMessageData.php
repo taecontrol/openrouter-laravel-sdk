@@ -6,7 +6,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Taecontrol\OpenRouter\Enums\Role;
 
-class ChatCompletionMessagesData implements Arrayable
+class ChatCompletionsMessageData implements Arrayable
 {
     public function __construct(
         public Role $role,

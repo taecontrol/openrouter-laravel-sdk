@@ -4,31 +4,39 @@ namespace Taecontrol\OpenRouter\DataObjects;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
-use Taecontrol\OpenRouter\Enums\Role;
 
 class ChatCompletionsChoicesData implements Arrayable
 {
     public function __construct(
-        public Role $role,
-        public int $content,
+        public ChatCompletionsMessageData $message,
         public ?string $refusal = null,
+        public ?string $logProbs = null,
+        public ?string $finishReason = null,
+        public ?string $nativeFinishReason = null,
+        public ?int $index = null,
     ) {}
 
     public static function from(array $data): self
     {
         return new self(
-            role: Role::from(Arr::get($data, 'role')),
-            content: Arr::get($data, 'content'),
-            refusal: Arr::get($data, 'refusal')
+            message: ChatCompletionsMessageData::from($data),
+            refusal: Arr::get($data, 'refusal'),
+            logProbs: Arr::get($data, 'logprobs'),
+            finishReason: Arr::get($data, 'finish_reason'),
+            nativeFinishReason: Arr::get($data, 'native_finish_reason'),
+            index: Arr::get($data, 'index'),
         );
     }
 
     public function toArray(): array
     {
         return [
-            'role' => $this->role->value,
-            'content' => $this->content,
+            'message' => $this->message->toArray(),
             'refusal' => $this->refusal,
+            'logprobs' => $this->logProbs,
+            'finish_reason' => $this->finishReason,
+            'native_finish_reason' => $this->nativeFinishReason,
+            'index' => $this->index,
         ];
     }
 }

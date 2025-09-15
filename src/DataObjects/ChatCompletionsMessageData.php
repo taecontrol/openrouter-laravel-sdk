@@ -18,8 +18,12 @@ class ChatCompletionsMessageData implements Arrayable
 
     public static function from(array $data): self
     {
+        $role = Arr::get($data, 'role') instanceof Role
+            ? Arr::get($data, 'role')
+            : Role::from(Arr::get($data, 'role'));
+
         return new self(
-            role: Arr::get($data, 'role'),
+            role: $role,
             content: Arr::get($data, 'content'),
             refusal: Arr::get($data, 'refusal'),
             reasoning: Arr::get($data, 'reasoning'),

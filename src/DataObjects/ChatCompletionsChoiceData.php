@@ -18,7 +18,7 @@ class ChatCompletionsChoiceData implements Arrayable
     public static function from(array $data): self
     {
         return new self(
-            message: ChatCompletionsMessageData::from($data),
+            message: ChatCompletionsMessageData::from(Arr::get($data, 'message')),
             logProbs: Arr::get($data, 'logprobs'),
             finishReason: Arr::get($data, 'finish_reason'),
             nativeFinishReason: Arr::get($data, 'native_finish_reason'),

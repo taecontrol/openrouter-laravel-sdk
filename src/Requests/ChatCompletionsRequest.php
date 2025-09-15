@@ -3,14 +3,18 @@
 namespace Taecontrol\OpenRouter\Requests;
 
 use JsonException;
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Http\Response;
+use Saloon\Traits\Body\HasJsonBody;
 use Taecontrol\OpenRouter\DataObjects\ChatCompletionsData;
 use Taecontrol\OpenRouter\DataObjects\ChatCompletionsResponse;
 
-class ChatCompletionsRequest extends Request
+class ChatCompletionsRequest extends Request implements HasBody
 {
+    use HasJsonBody;
+
     protected Method $method = Method::POST;
 
     public function __construct(public readonly ChatCompletionsData $data) {}

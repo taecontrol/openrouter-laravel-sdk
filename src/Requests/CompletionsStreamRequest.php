@@ -2,12 +2,16 @@
 
 namespace Taecontrol\OpenRouter\Requests;
 
+use Saloon\Contracts\Body\HasBody;
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
+use Saloon\Traits\Body\HasJsonBody;
 use Taecontrol\OpenRouter\DataObjects\CompletionsData;
 
-class CompletionsStreamRequest extends Request
+class CompletionsStreamRequest extends Request implements HasBody
 {
+    use HasJsonBody;
+
     protected Method $method = Method::POST;
 
     public function __construct(public readonly CompletionsData $data) {}

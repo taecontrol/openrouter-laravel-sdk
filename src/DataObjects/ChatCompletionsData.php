@@ -4,20 +4,22 @@ namespace Taecontrol\OpenRouter\DataObjects;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class ChatCompletionsData implements Arrayable
+readonly class ChatCompletionsData implements Arrayable
 {
     public function __construct(
-        public readonly string $model,
+        public string $model,
         /** @var ChatCompletionsMessageData[] */
-        public readonly array $messages,
-        public readonly ?ReasoningData $reasoningData = null,
-        public readonly ?UsageData $usageData = null,
-        public readonly ?int $maxTokens = null,
-        public readonly ?float $temperature = null,
-        public readonly ?int $seed = null,
-        public readonly ?float $topP = null,
-        public readonly ?int $topK = null,
-        public readonly ?string $user = null,
+        public array $messages,
+        /** @var list<mixed> */
+        public array $tools = [],
+        public ?ReasoningData $reasoningData = null,
+        public ?UsageData $usageData = null,
+        public ?int $maxTokens = null,
+        public ?float $temperature = null,
+        public ?int $seed = null,
+        public ?float $topP = null,
+        public ?int $topK = null,
+        public ?string $user = null,
     ) {}
 
     public function toArray(): array
@@ -25,6 +27,7 @@ class ChatCompletionsData implements Arrayable
         return [
             'model' => $this->model,
             'messages' => $this->messages,
+            'tools' => $this->tools,
             'reasoning' => $this->reasoningData?->toArray(),
             'usage' => $this->usageData?->toArray(),
             'max_tokens' => $this->maxTokens,

@@ -39,6 +39,7 @@ class ChatCompletionsRequest extends Request implements HasBody
         $data = [
             'model' => $this->data->model,
             'messages' => $this->data->messages,
+            'tools' => $this->data->tools,
         ];
 
         if ($this->data->reasoningData) {

@@ -14,6 +14,7 @@ class ChatCompletionsMessageData implements Arrayable
         public ?string $refusal = null,
         public ?string $reasoning = null,
         public array $reasoningDetails = [],
+        public array $toolCalls = [],
     ) {}
 
     public static function from(array $data): self
@@ -28,6 +29,7 @@ class ChatCompletionsMessageData implements Arrayable
             refusal: Arr::get($data, 'refusal'),
             reasoning: Arr::get($data, 'reasoning'),
             reasoningDetails: Arr::get($data, 'reasoning_details', []),
+            toolCalls: Arr::get($data, 'tool_calls', []),
         );
     }
 
@@ -39,6 +41,7 @@ class ChatCompletionsMessageData implements Arrayable
             'refusal' => $this->refusal,
             'reasoning' => $this->reasoning,
             'reasoning_details' => $this->reasoningDetails,
+            'tool_calls' => $this->toolCalls,
         ];
     }
 }

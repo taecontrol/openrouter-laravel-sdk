@@ -15,7 +15,7 @@ class OpenRouterServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('openrouter-laravel-sdk')
+            ->name('laravel-openrouter-laravel-sdk')
             ->hasConfigFile('openrouter-laravel-sdk');
     }
 }

@@ -34,6 +34,10 @@ class ChatCompletionsStreamRequest extends Request implements HasBody
             $data['reasoning'] = $this->data->reasoningData->toArray();
         }
 
+        if ($this->data->responseFormat) {
+            $data['response_format'] = $this->data->responseFormat->toArray();
+        }
+
         if ($this->data->usageData) {
             $data['usage'] = $this->data->usageData->toArray();
         }

@@ -13,6 +13,7 @@ readonly class ChatCompletionsData implements Arrayable
         /** @var list<mixed> */
         public array $tools = [],
         public ?ReasoningData $reasoningData = null,
+        public ?ResponseFormatData $responseFormat = null,
         public ?UsageData $usageData = null,
         public ?int $maxTokens = null,
         public ?float $temperature = null,
@@ -29,6 +30,7 @@ readonly class ChatCompletionsData implements Arrayable
             'messages' => $this->messages,
             'tools' => $this->tools,
             'reasoning' => $this->reasoningData?->toArray(),
+            'response_format' => $this->responseFormat?->toArray(),
             'usage' => $this->usageData?->toArray(),
             'max_tokens' => $this->maxTokens,
             'temperature' => $this->temperature,

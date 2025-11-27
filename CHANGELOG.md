@@ -2,6 +2,14 @@
 
 All notable changes to `openrouter-laravel-sdk` will be documented in this file.
 
+## 0.0.6 - 2025-11-27
+
+### What's Changed
+
+* Implement Embeddings API and enhance ChatCompletionsResponse by @rpereira-tae in https://github.com/taecontrol/openrouter-laravel-sdk/pull/8
+
+**Full Changelog**: https://github.com/taecontrol/openrouter-laravel-sdk/compare/0.0.5...0.0.6
+
 ## 0.0.5 - 2025-11-13
 
 ### What's Changed

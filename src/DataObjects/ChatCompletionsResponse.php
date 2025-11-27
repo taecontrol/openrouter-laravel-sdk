@@ -28,17 +28,29 @@ class ChatCompletionsResponse implements Arrayable
             Arr::get($data, 'choices', [])
         );
 
+        $usageData = Arr::get($data, 'usage');
+
         return new self(
             id: Arr::get($data, 'id'),
             choices: $choices,
+            provider: Arr::get($data, 'provider'),
+            model: Arr::get($data, 'model'),
+            object: Arr::get($data, 'object'),
+            created: Arr::get($data, 'created'),
+            usage: $usageData ? UsageResponseData::from($usageData) : null,
         );
     }
 
     public function toArray(): array
     {
-        return [
+        return array_filter([
             'id' => $this->id,
             'choices' => array_map(fn ($choice) => $choice->toArray(), $this->choices),
-        ];
+            'provider' => $this->provider,
+            'model' => $this->model,
+            'object' => $this->object,
+            'created' => $this->created,
+            'usage' => $this->usage?->toArray(),
+        ], fn ($value) => ! is_null($value));
     }
 }

@@ -7,14 +7,15 @@
 
 A lightweight, expressive Laravel wrapper around the [OpenRouter](https://openrouter.ai) API built on top of the excellent [Saloon](https://docs.saloon.dev/) HTTP client. It provides:
 
-- Simple methods for text completions and chat completions (with optional streaming)
-- Typed Data Objects for building requests and parsing responses
-- Configurable base URI, API token and timeouts
-- Support for reasoning & usage reporting parameters
+-   Simple methods for text completions and chat completions (with optional streaming)
+-   Typed Data Objects for building requests and parsing responses
+-   Configurable base URI, API token and timeouts
+-   Support for reasoning & usage reporting parameters
 
 ## Requirements
-- PHP 8.2+
-- Laravel 10 or 11
+
+-   PHP 8.2+
+-   Laravel 10 or 11
 
 ## Installation
 
@@ -137,39 +138,69 @@ while (!$stream->eof()) {
 }
 ```
 
+## Embeddings
+
+You can generate embeddings for text using the `embeddings` method:
+
+```php
+use Taecontrol\OpenRouter\Facades\OpenRouter;
+use Taecontrol\OpenRouter\DataObjects\EmbeddingsData;
+use Taecontrol\OpenRouter\Enums\EmbeddingEncodingFormat;
+
+$data = new EmbeddingsData(
+    input: 'The quick brown fox jumps over the lazy dog',
+    model: 'text-embedding-ada-002',
+    encodingFormat: EmbeddingEncodingFormat::Float, // Optional: Float or Base64
+);
+
+$response = OpenRouter::embeddings($data);
+
+foreach ($response->data as $embeddingObject) {
+    print_r($embeddingObject->embedding); // array of floats
+    echo $embeddingObject->index; // int
+}
+
+// Usage statistics are also available
+echo $response->usage->totalTokens;
+```
+
 ## Request Data Objects
 
 You construct strongly-typed request DTOs:
 
-- CompletionsData(model, prompt, reasoningData?, usageData?, maxTokens?, temperature?, seed?, topP?, topK?, user?)
-- ChatCompletionsData(model, messages[], reasoningData?, usageData?, maxTokens?, temperature?, seed?, topP?, topK?, user?)
-- ChatCompletionsMessageData(role, content, refusal?, reasoning?, reasoningDetails[]?)
-- ReasoningData(effort: Effort|null, maxTokens: string|null, exclude: bool|null)
-- UsageData(include: bool = false)
+-   CompletionsData(model, prompt, reasoningData?, usageData?, maxTokens?, temperature?, seed?, topP?, topK?, user?)
+-   ChatCompletionsData(model, messages[], reasoningData?, usageData?, maxTokens?, temperature?, seed?, topP?, topK?, user?)
+-   ChatCompletionsMessageData(role, content, refusal?, reasoning?, reasoningDetails[]?)
+-   EmbeddingsData(input, model, encodingFormat?, dimensions?, user?, provider?, inputType?)
+-   ReasoningData(effort: Effort|null, maxTokens: string|null, exclude: bool|null)
+-   UsageData(include: bool = false)
 
 ### Optional Parameters
 
-| Parameter | Purpose |
-|-----------|---------|
-| temperature | Controls randomness (float) |
-| max_tokens | Limit output tokens (int) |
-| top_p | Nucleus sampling (float) |
-| top_k | Limits token selection to top K (int) |
-| seed | Determinism when supported (int) |
-| user | End-user identifier string |
-| reasoning | Structured reasoning controls (ReasoningData) |
-| usage | Ask API to include usage breakdown (UsageData) |
+| Parameter   | Purpose                                        |
+| ----------- | ---------------------------------------------- |
+| temperature | Controls randomness (float)                    |
+| max_tokens  | Limit output tokens (int)                      |
+| top_p       | Nucleus sampling (float)                       |
+| top_k       | Limits token selection to top K (int)          |
+| seed        | Determinism when supported (int)               |
+| user        | End-user identifier string                     |
+| reasoning   | Structured reasoning controls (ReasoningData)  |
+| usage       | Ask API to include usage breakdown (UsageData) |
 
 ### Reasoning Effort Enum
+
 Effort values come from `Taecontrol\OpenRouter\Enums\Effort` (e.g. `Effort::Low`, `Effort::Medium`, `Effort::High`).
 
 ### Roles Enum
+
 Use `Taecontrol\OpenRouter\Enums\Role` (e.g. `Role::User`, `Role::Assistant`, `Role::System`).
 
 ## Responses
 
-- CompletionsResponse(id, choices[] CompletionsChoicesData)
-- ChatCompletionsResponse(id, choices[] ChatCompletionsChoiceData)
+-   CompletionsResponse(id, choices[] CompletionsChoicesData)
+-   ChatCompletionsResponse(id, choices[] ChatCompletionsChoiceData)
+-   EmbeddingsResponseData(object, data[] EmbeddingObjectData, model, usage?)
 
 Each ChatCompletionsChoiceData wraps a ChatCompletionsMessageData (so you always look at `$choice->message->content`).
 
@@ -189,10 +220,11 @@ $response = $client->completions(new CompletionsData(
 ```
 
 ## Timeouts
+
 Configure in `config/openrouter-laravel-sdk.php`:
 
-- connect_timeout (default 10s)
-- request_timeout (default 120s)
+-   connect_timeout (default 10s)
+-   request_timeout (default 120s)
 
 ## Testing
 
@@ -208,9 +240,9 @@ You can mock the underlying Saloon connector or stub methods on the OpenRouter c
 
 All request methods may throw:
 
-- Saloon\Exceptions\Request\RequestException (HTTP level problems)
-- Saloon\Exceptions\Request\FatalRequestException (network/transport issues)
-- \Throwable (in edge cases such as JSON decoding)
+-   Saloon\Exceptions\Request\RequestException (HTTP level problems)
+-   Saloon\Exceptions\Request\FatalRequestException (network/transport issues)
+-   \Throwable (in edge cases such as JSON decoding)
 
 Wrap calls as needed:
 
@@ -226,18 +258,23 @@ try {
 ```
 
 ## Roadmap / Ideas
-- Add image generation endpoints when exposed
-- Add tools/function calling support if OpenRouter standardizes schema
-- Add automatic pagination helpers if needed
+
+-   Add image generation endpoints when exposed
+-   Add tools/function calling support if OpenRouter standardizes schema
+-   Add automatic pagination helpers if needed
 
 ## Contributing
+
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Changelog
+
 See [CHANGELOG](CHANGELOG.md).
 
 ## Security Vulnerabilities
+
 Please review [our security policy](../../security/policy) for reporting guidelines.
 
 ## License
+
 Released under the MIT License. See [LICENSE](LICENSE.md).

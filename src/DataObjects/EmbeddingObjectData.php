@@ -11,8 +11,7 @@ class EmbeddingObjectData implements Arrayable
         public string $object,
         public array $embedding,
         public int $index,
-    ) {
-    }
+    ) {}
 
     public static function from(array $data): self
     {

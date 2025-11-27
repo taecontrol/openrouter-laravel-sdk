@@ -1,8 +1,8 @@
 <?php
 
+use Taecontrol\OpenRouter\DataObjects\EmbeddingObjectData;
 use Taecontrol\OpenRouter\DataObjects\EmbeddingsData;
 use Taecontrol\OpenRouter\DataObjects\EmbeddingsResponseData;
-use Taecontrol\OpenRouter\DataObjects\EmbeddingObjectData;
 use Taecontrol\OpenRouter\DataObjects\UsageResponseData;
 use Taecontrol\OpenRouter\Enums\EmbeddingEncodingFormat;
 

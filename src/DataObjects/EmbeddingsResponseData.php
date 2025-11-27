@@ -2,10 +2,9 @@
 
 namespace Taecontrol\OpenRouter\DataObjects;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;
 use Saloon\Traits\Responses\HasResponse;
-use Illuminate\Contracts\Support\Arrayable;
-use Taecontrol\OpenRouter\DataObjects\UsageResponseData;
 
 class EmbeddingsResponseData implements Arrayable
 {
@@ -18,8 +17,7 @@ class EmbeddingsResponseData implements Arrayable
         public string $model,
         public ?string $id = null,
         public ?UsageResponseData $usage = null,
-    ) {
-    }
+    ) {}
 
     public static function from(array $data): self
     {

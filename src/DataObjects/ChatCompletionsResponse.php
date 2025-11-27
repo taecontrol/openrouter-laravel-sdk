@@ -19,8 +19,7 @@ class ChatCompletionsResponse implements Arrayable
         public ?string $object = null,
         public ?int $created = null,
         public ?UsageResponseData $usage = null,
-    ) {
-    }
+    ) {}
 
     public static function from(array $data): self
     {
@@ -52,6 +51,6 @@ class ChatCompletionsResponse implements Arrayable
             'object' => $this->object,
             'created' => $this->created,
             'usage' => $this->usage?->toArray(),
-        ], fn ($value) => !is_null($value));
+        ], fn ($value) => ! is_null($value));
     }
 }

@@ -15,8 +15,7 @@ readonly class EmbeddingsData implements Arrayable
         public ?string $user = null,
         public ?array $provider = null,
         public ?string $inputType = null,
-    ) {
-    }
+    ) {}
 
     public function toArray(): array
     {
@@ -28,6 +27,6 @@ readonly class EmbeddingsData implements Arrayable
             'user' => $this->user,
             'provider' => $this->provider,
             'input_type' => $this->inputType,
-        ], fn ($value) => !is_null($value));
+        ], fn ($value) => ! is_null($value));
     }
 }

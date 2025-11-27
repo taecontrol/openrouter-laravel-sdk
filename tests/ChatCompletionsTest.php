@@ -1,7 +1,7 @@
 <?php
 
-use Taecontrol\OpenRouter\DataObjects\ChatCompletionsResponse;
 use Taecontrol\OpenRouter\DataObjects\ChatCompletionsChoiceData;
+use Taecontrol\OpenRouter\DataObjects\ChatCompletionsResponse;
 use Taecontrol\OpenRouter\DataObjects\UsageResponseData;
 
 it('deserializes chat completions response data', function () {

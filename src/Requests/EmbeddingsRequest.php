@@ -17,9 +17,7 @@ class EmbeddingsRequest extends Request implements HasBody
 
     protected Method $method = Method::POST;
 
-    public function __construct(public readonly EmbeddingsData $data)
-    {
-    }
+    public function __construct(public readonly EmbeddingsData $data) {}
 
     public function resolveEndpoint(): string
     {

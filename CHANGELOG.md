@@ -2,6 +2,10 @@
 
 All notable changes to `openrouter-laravel-sdk` will be documented in this file.
 
+## 0.0.7 - 2025-11-27
+
+**Full Changelog**: https://github.com/taecontrol/openrouter-laravel-sdk/compare/0.0.6...0.0.7
+
 ## 0.0.6 - 2025-11-27
 
 ### What's Changed
